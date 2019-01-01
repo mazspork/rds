@@ -1,0 +1,2435 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    Image Alchemy
+
+
+
+
+                                     Version 1.6
+
+
+
+
+                                      Addendum
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                               Handmade Software, Inc.
+
+
+
+
+          Trademarks       Image Alchemy is a trademark of Handmade
+                           Software, Inc.
+
+                           All other products or services mentioned in this
+                           manual are trademarks, registered trademarks,
+                           service marks, or registered service marks of
+                           their respective companies or organizations.
+
+                           Even though they are never mentioned in this
+                           document, you should know that Yellow Pages is a
+                           registered trademark in the United Kingdom of
+                           British Telecommunications plc., and may also be
+                           a trademark of various telephone companies
+                           around the world.
+
+
+
+
+
+
+
+                           Copyright (c) 1990-1992 Handmade Software, Inc.
+
+                           All Rights Reserved
+
+
+
+                           First Printing
+
+
+
+
+
+
+
+
+
+                           Handmade Software, Inc.
+                           15951 Los Gatos Blvd., Suite 17
+                           Los Gatos, CA  95032
+                           +1 408 358-1292
+                           +1 408 358-2694 fax
+                           +1 408 356-3297 BBS
+
+                           Internet:  hsi@netcom.COM
+                           CompuServe:  71330, 3136
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-ii
+
+
+
+
+
+
+
+          Contents
+          -----------------------------------------------------------------
+
+
+
+          Introduction.......................... 1
+
+          Image Alchemy for MS-DOS.............. 2
+
+          File Formats.......................... 4
+             Alpha Microsystems BMP............. 5
+             AVHRR.............................. 6
+             CALS............................... 8
+             Cubicomp PictureMaker.............. 9
+             Dr. Halo CUT...................... 10
+             First Publisher ART............... 11
+             GEM VDI Image File................ 12
+             GOES.............................. 14
+             IBM Picture Maker................. 16
+             PDS............................... 17
+             RIX............................... 18
+             SGI............................... 19
+             SPOT Image........................ 20
+             Sun Raster........................ 21
+             Windows Bitmap.................... 22
+             XPM............................... 25
+
+          Colour and Palette Options........... 26
+             Dither............................ 27
+             Gamma correction.................. 29
+             Negate............................ 31
+             Spiff............................. 32
+
+          Viewing Options (MS-DOS Only)........ 34
+             View Image in 15 Bit Mode......... 35
+             View Scaled Image in 15 Bit Mode.. 36
+
+          Answers to Frequently Asked Questions 37
+
+          Version History...................... 38
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-iii
+
+
+
+
+
+
+
+
+
+          Introduction to this Addendum
+          -----------------------------------------------------------------
+
+
+          Why an Addendum? This addendum covers changes in Image Alchemy
+                           that were made after the manual was printed.
+                           These changes consist of new file formats,
+                           changes to existing file formats, additions and
+                           changes in colouring options, and changes in the
+                           viewing options (for the MS-DOS version only).
+
+                           Where changes have been made, this manual covers
+                           the options in their entirety, saving you the
+                           trouble of having to look at both manuals for a
+                           single option.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-1
+
+
+
+
+
+
+
+          Image Alchemy for MS-DOS
+          -----------------------------------------------------------------
+
+
+          Use of extended  If there is enough extended or expanded memory
+          and expanded     available, Alchemy will use it instead of the
+          memory           temporary file it would otherwise use during
+                           some conversions.  To use extended memory you
+                           must have an XMS driver installed in the
+                           config.sys file (such as HIMEM.SYS or 386MAX).
+                           To use expanded memory you must have a LIM 3.2
+                           or LIM 4.0 expanded memory driver installed
+                           (such as EMM386, QEMM, or 386MAX).
+
+                           It is possible for there to be some
+                           incompatibility when using some older drivers
+                           and/or TSRs which also use extended memory.
+                           Therefore Alchemy's use of extended/expanded
+                           memory can be disabled.  To disable use of
+                           extended and expanded memory, set an environment
+                           variable called 'alchemy' to 'x' (type "set
+                           alchemy=x" at the DOS prompt).
+
+                           Note that the availability of extended or
+                           expanded memory will not allow you to convert
+                           larger images, just speed up conversions.  We
+                           also have a 386 version of Image Alchemy, which
+                           will allow 80386 and 80486 users to make use of
+                           the linear addressing space of those processors
+                           along with virtual memory to convert images of
+                           up to 32000 x 32000 (assuming you have enough
+                           disk space).  Please contact us if you are
+                           running out of memory and are interested in
+                           upgrading to Alchemy/386.
+
+          Checking for     Alchemy will normally check to determine if
+          8514/A boards    there is an 8514/A board installed in the
+                           computer when viewing images.  However, this can
+                           cause problems with some network boards, as they
+                           use the same I/O addresses that 8514/A boards
+                           use.  To disable 8514/A checking, set the
+                           environment variable called 'alchemy' to '8'
+                           (type "set alchemy=8" at the DOS prompt).
+
+                           Note that this can be combined with other
+                           options; for example, to disable both 8514/A
+                           checking and extended/expanded memory usage, use
+                           "set alchemy=8x".
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-2
+
+
+
+          Limiting maximum Alchemy will automatically choose the lowest
+          display          resolution which will fit the entire image when
+          resolution       viewing images without specifying a display
+                           resolution with a VESA compatible VGA board.
+                           However, depending on the monitor and VGA board
+                           combination you have, this can be bad since the
+                           monitor may not support all the resolutions the
+                           SVGA board does.  Therefore the environment
+                           variable 'alchemy' may now be set to indicate
+                           the maximum display resolution which Alchemy
+                           should use.  Set the alchemy variable to the
+                           highest horizontal resolution which your monitor
+                           is capable of.  Valid values are 1280, 1024,
+                           800, and 640.  For example, "set alchemy=800",
+                           if your monitor only supports 640x480 and
+                           800x600 mode.
+
+                           Note that this can be combined with other
+                           options; for example, to disable 8514/A
+                           checking, disable extended/expanded memory
+                           usage, and limit the viewing resolution to
+                           640x480 use "set alchemy=8x640".
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-3
+
+
+
+
+
+
+
+          Output Options
+          -----------------------------------------------------------------
+
+
+          Introduction     Since the release of v1.5 several new output
+                           formats have been added and several existing
+                           output formats have had compression modes or
+                           output options added.
+
+                           Formats which have had options added:
+                              GEM VDI        Sun Raster
+                              SGI            Windows BMP
+
+                           New formats:
+                              Alpha Microsystems BMP
+                              AVHRR
+                              CALS
+                              Cubicomp PictureMaker
+                              Dr. Halo CUT
+                              First Publisher ART
+                              GOES
+                              IBM Picture Maker
+                              PDS
+                              RIX
+                              SPOT Image
+                              XPM
+
+                           In addition to those changes, the following
+                           formats are now optimally compressed when they
+                           are written by Image Alchemy; this can result in
+                           a significant savings in disk space for certain
+                           images:
+                              WPG
+                              Utah Raster Toolkit (RLE)
+                              GEM IMG
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-4
+
+
+
+          Alpha Microsystems BMP                                         -M
+
+
+                           Alpha Microsystems BMP files are used by Alpha
+                           Microsystems.
+
+          Syntax           -M compressionType
+
+          Parameter        compressionType:
+                                0:None
+                                1:Packed
+                           The default is None.
+
+          Extension        .bmp
+
+          Creator          Alpha Microsystems.
+
+          Used by          Alpha Microsystems workstations.
+
+          Variations       Reads and writes 1, 4, 8, and 24 bit unpacked
+                           and packed (run-length encoded) RGB images.
+
+          Limitations      Reading and writing HLS images is not supported.
+
+          Comments         When reading an image without a palette Alchemy
+                           will generate a gray-scale palette.
+
+          Examples         Convert the GIF file, bigpict.gif, to an
+                           uncompressed Alpha Microsystems BMP file:
+
+                                alchemy bigpict.gif -M
+
+                           Do the same thing, but force a 24 bit image, and
+                           compress the image:
+
+                                alchemy bigpict.gif -M1 -24
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-5
+
+
+
+          AVHRR                                                         --R
+
+
+                           AVHRR files are used for satellite image data.
+
+          Syntax           --R outputType
+
+          Parameter        outputType
+                                1:IDIDAS Uncompressed
+                                2:IDIDAS Compressed type 1
+                           The default is 1 (IDIDAS Uncompressed).
+
+          Extension        .sst
+
+          Creator          National Oceanic and Atmospheric Administration
+                           (NOAA)
+                           National Environmental Satellite Data
+                           Information Service (NESDIS)
+
+          Used by          IDIDAS
+                           SSTMAP
+                           IMGMAP
+
+          Variations       Reads 8 and 11 bits per pixel IDIDAS AVHRR
+                           files.
+
+                           Writes 11 bits per pixel IDIDAS AVHRR files.
+
+          Limitations      Level 1B AVHRR files will be supported at a
+                           later date; please contact us for more
+                           information.
+
+                           Alchemy discards all but the top 8 bits when
+                           reading 11 bit AVHRR files.  When writing, the
+                           bottom 3 bits are padded with 0.
+
+                           Any graphics information is discarded when
+                           reading the file.
+
+                           Since AVHRR images are always grayscale, Alchemy
+                           assumes the use of the -b and -8 options when
+                           writing a AVHRR file.
+
+          Comments         AVHRR images contain a lot of information which
+                           is not part of the image data.  This information
+                           includes the time and date the image was
+                           captured, the satellite which captured the
+                           image, the type of instrumentation used, etc.
+                           When reading AVHRR images this information is
+                           discarded; when writing AVHRR images 0 is
+                           written for all values for which data is
+                           unavailable.
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-6
+
+
+
+          Examples         Convert the GOES file, florida.goe, to an
+                           uncompressed IDIDAS AVHRR file:
+
+                                alchemy --R1 florida.goe
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-7
+
+
+
+          CALS                                                          --c
+
+
+                           Computer-aided Acquisition and Logistics Support
+                           (CALS) files are black and white images used by
+                           the US Government as part of their transition to
+                           electronic media.
+
+          Syntax           --c
+
+          Extension        .cal
+
+          Creator          Defense Logistics Agency (DLA)
+
+          Used by          Department of Defense (DoD)
+
+          Variations       Reads and writes type 1 (Group 4 raster) CALS
+                           images.
+
+          Limitations      Document labels, such as document ID and figure
+                           ID, are ignored.
+
+          Comments         Since CALS files are always black and white,
+                           Alchemy assumes the use of the -b, -8, and -c2
+                           options when writing CALS files.
+
+                           CALS images are Fax Group IV compressed and are
+                           therefore a good way of storing black and white
+                           line drawings and scans.
+
+          Examples         Convert the TIFF file page1.tif to a CALS file:
+
+                                alchemy page1.tif --c
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-8
+
+
+
+          Cubicomp PictureMaker                                         --P
+
+
+                           Cubicomp PictureMaker files are used in
+                           broadcast-quality three dimensional modelling
+                           and animation.
+
+          Syntax           --P
+
+          Extension        .r8 (Red channel image data)
+                           .g8 (Green channel image data)
+                           .b8 (Blue channel image data)
+                           .a8 (Alpha channel image data [optional)
+
+          Creator          Cubicomp Corp.
+
+          Used by          Cubicomp PictureMaker
+
+          Variations       Reads and writes 24 bit true colour images.
+
+          Limitations      If an alpha channel exists, it will be ignored.
+
+                           8-bit paletted PictureMaker files are
+                           unsupported.
+
+          Comments         This format is not the same as IBM Picture
+                           Maker.
+
+                           PictureMaker images have either three or four
+                           separate files per image: a red, green, blue,
+                           and optional alpha channel.  You specify the
+                           name of the .r8 file and Alchemy automatically
+                           generates the name of the .g8 and .b8 files
+
+                           When writing a PictureMaker file Alchemy will
+                           overwrite, without warning, existing .g8 and .b8
+                           files.
+
+          Examples         Convert the 24-bit JPEG image stones.jpg to
+                           PictureMaker files:
+
+                                alchemy --P stones.jpg
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-9
+
+
+
+          Dr. Halo CUT                                                  --C
+
+
+                           Dr. Halo CUT files are used by various MS-DOS
+                           based paint software.
+
+          Syntax           --C
+
+          Extension        .pal (palette and header)
+                           .cut (pixel data)
+
+          Creator          Media Cybernetics
+
+          Used by          Dr. HALO III Paint Package
+                           HALO Desktop Imager
+
+          Variations       8 bits per pixel
+
+          Comments         Dr. Halo CUT images are actually two files.  You
+                           specify the name of the .cut file and Alchemy
+                           automatically generates the name of the .pal
+                           file.
+
+                           When writing a Dr. Halo CUT file Alchemy will
+                           overwrite, without warning, existing .pal files.
+
+          Examples         Convert the image test.pcx to a Dr. Halo CUT
+                           file:
+
+                                alchemy test.pcx --C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-10
+
+
+
+          First Publisher ART                                           --F
+
+
+                           First Publisher ART files are black and white
+                           images used as clip art by First Publisher.
+
+          Syntax           --F
+
+          Extension        .art
+
+          Creator          Software Publishing Corp.
+
+          Used by          First Publisher
+
+          Variations       Black and white, 1 bit per pixel.
+
+          Comments         Since ART files are always black and white, 1
+                           bit per pixel, Alchemy assumes use of the -c2
+                           and -b options when writing them.
+
+          Examples         Convert the image scan.pcx to a First Publisher
+                           ART file:
+
+                                alchemy scan.pcx --F
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-11
+
+
+
+          GEM VDI Image File                                            --g
+
+
+                           VDI files are files that were developed by
+                           Digital Research to use with GEM.
+
+          Syntax           --g
+
+          Extension        .img
+
+          Creator          Digital Research Inc.
+
+          Used by          GEM
+
+          Variations       Reads 1-8 bit grayscale and 3 and 4 bit colour
+                           files.
+
+                           Writes 1, 3, and 4 bit grayscale and 3 and 4 bit
+                           colour files.
+
+          Limitations      The support for colour and multiple bit
+                           grayscale GEM files is not very universal.
+                           Therefore make sure the application you are
+                           using to read the GEM files can in fact handle
+                           them.
+
+                           Alchemy defaults to writing out a 1 bit, black
+                           and white GEM file.  You can explicitly force a
+                           3 plane colour file by use of the -c8 option and
+                           a 4 plane colour file by use of the -c16 option
+                           (you may add a -b to write a grayscale file
+                           instead of a colour file).
+
+          Comments         Because colour GEM files have only 3 or 4 bits
+                           of information and no palette support the
+                           quality is generally not very good for scanned
+                           images.  The GEM format seems to have been
+                           designed for line drawings.
+
+
+
+          Examples         Convert the image scan.pcx to a black and white
+                           GEM file:
+
+                                alchemy scan.pcx --g
+
+                           Convert the image bigscan.tga to a 640x480, 8
+                           colour GEM file, using nearest neighbor scaling
+                           and type 2 dithering:
+
+                                alchemy -c 8 --g bigscan.tga -X640
+                                  -Y480 -d2
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-12
+
+
+
+                           Do the same thing but write an 8 shade grayscale
+                           file with no dithering:
+
+                                alchemy -c 8 --g bigscan.tga -X640
+                                  -Y480 -d -b
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-13
+
+
+
+          GOES                                                          --G
+
+
+                           GOES files are used for satellite image data.
+
+          Syntax           --G goesType
+
+          Parameter        goesType:
+                                0:GARS format
+                                1:McIDAS format
+                           The default is 0 (GARS format).
+
+          Extension        .goe
+
+          Creator          The University of Wisconsin
+                           National Oceanic and Atmospheric Administration
+                           (NOAA)
+                           National Environmental Satellite Data
+                           Information Service (NESDIS)
+
+          Used by          Various satellite image processing software,
+                           including the McIDAS system.
+
+          Variations       Reads 8, 16, and 32 bits per pixel GOES images.
+
+                           Writes 8 bits per pixel images.
+
+          Limitations      When reading 16 and 32 bit images Alchemy
+                           discards all but the top 8 bits of data.
+
+                           Alchemy discards any calibration data and level
+                           maps when reading images.
+
+                           Because of difficulty in getting a sufficient
+                           number of test images in the GOES format
+                           (especially the PUT format) reading GOES images
+                           has not been thoroughly tested.  If you have any
+                           GOES images  which Alchemy does not read
+                           correctly please contact us.
+
+          Comments         The GARS format is a 7680 bytes per block,
+                           Motorola byte-order, EBCDIC format; the MCIDAS
+                           format is a continuous data, Intel byte-order,
+                           ASCII format.
+
+                           Since GOES images are always grayscale, Alchemy
+                           assumes the use of the -b and -8 options when
+                           writing a GOES file.
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-14
+
+
+
+                           GOES images contain a lot of information which
+                           is not part of the image data.  This information
+                           includes the time and date the image was
+                           captured, the satellite which captured the
+                           image, the type of instrumentation used, etc.
+                           When reading a GOES image this information is
+                           discarded; when writing a GOES images 0 is
+                           written for all values for which data is
+                           unavailable.
+
+          Examples         Convert the Erdas file, florida.gis, into a GOES
+                           GARS image:
+
+                                alchemy --G0 florida.gis
+
+                           Do the same thing, but write out a GOES McIDAS
+                           image:
+
+                                alchemy --G1 florida.gis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-15
+
+
+
+          IBM Picture Maker                                             --i
+
+
+                           IBM Picture Maker files are used by IBM
+                           presentation software.
+
+          Syntax           --i
+
+          Extension        .pic
+
+          Creator          IBM
+
+          Used by          IBM Storyboard Live!
+
+          Variations       Reads and writes 256 colour Picture Maker files.
+
+          Limitations      16 colour Picture Maker files are not supported.
+                           Picture Maker images can not be larger than
+                           640x480.
+
+          Comments         This is not the same format as Cubicomp
+                           PictureMaker.
+
+                           256 colour Picture Maker files may be either
+                           320x200 or 640x480.  Image Alchemy will write
+                           the smallest variation that the image will fit
+                           in, with the image centered; the borders will be
+                           filled with colour 0.
+
+          Examples         Convert the PCX file, giraffe.pcx, into an IBM
+                           Picture Maker file:
+
+                                alchemy --i giraffe.pcx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-16
+
+
+
+          PDS                                                           --p
+
+
+                           PDS labeled images are used by NASA for
+                           planetary images.
+
+          Syntax           --p
+
+          Extensions       .ibg
+                           .imq
+
+          Creator          NASA
+
+          Used by          NASA distributes collections of planetary images
+                           on CD-ROM in PDS format.
+
+          Variations       Reads 1 and 8 bit uncompressed and 8 bit first
+                           difference Huffman compressed files.
+
+                           Writes 8 bit gray-scale uncompressed PDS files.
+
+          Limitations      PDS images must begin with either an
+                           "SFDU_LABEL" or a "FILE_TYPE" record for Alchemy
+                           to be able to identify it.
+
+                           Occasionally a PDS labeled image has a palette.
+                           There doesn't seem to be any standard format for
+                           the palette; Image Alchemy handles the palettes
+                           we've encountered.
+
+                           Any portions of the PDS labels not required to
+                           extract the image, such as longitude and
+                           latitude, are ignored.
+
+          Comments         Since Image Alchemy only writes gray-scale PDS
+                           images, Alchemy assumes the use of the -b option
+                           when writing PDS files.
+
+                           Some PDS images actually consist of two files, a
+                           label file and a data file.  To read that type
+                           image you should use the name of the label file
+                           and Alchemy will find the data file.
+
+          Examples         Convert the GOES file, phoenix.goe, into a PDS
+                           labeled image:
+
+                                alchemy --p phoenix.goe
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-17
+
+
+
+          RIX                                                            -R
+
+
+                           RIX files are colour files developed by ColoRIX
+                           to use with their paint software.
+
+          Syntax           -R
+
+          Extension        .scx
+                           .rix
+
+          Creator          RIX Softworks, Inc.
+
+          Used by          ColoRIX software
+
+          Variations       Reads and writes Type 0 (8 bits per pixel) and
+                           Type 4 (4 bits per pixel) images.
+
+          Limitations      We would like to add support for Type 1 and Type
+                           2 images but we haven't been able to find any;
+                           if you have some please contact us.
+
+          Comments         A type 0 file will be written if there are more
+                           than 16 colours in the image; otherwise a type 4
+                           file will be written.
+
+          Examples         Convert the file test.gif to a RIX file:
+
+                                alchemy test.gif -R
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-18
+
+
+
+          Silicon Graphics Image (SGI)                                   -n
+
+
+                           Silicon Graphics Image files are used by Silicon
+                           Graphics workstations.
+
+          Syntax           -n compressionType
+
+          Parameter        compressionType:
+                                0:Verbatim (uncompressed)
+                                1:RLE compressed
+                           The default is 0 (Verbatim).
+
+          Extension        .sgi
+
+          Creator          Silicon Graphics, Inc.
+
+          Used by          Silicon Graphics workstations.
+
+          Variations       Reads and writes 1, 8 (gray-scale), and 24 bit
+                           verbatim (uncompressed) and RLE files.
+
+          Comments         Only gray-scale images may be 8 bit files.
+                           Alchemy will automatically switch to 24 bit mode
+                           when writing a colour image.
+
+          Example          Convert the Sun raster file sun.im8 to a SGI
+                           file called sgiout:
+
+                                alchemy -n sun.im8 sgiout -.
+
+                           Do the same thing, but write out a RLE
+                           compressed SGI file:
+
+                                alchemy -n1 sun.im8 sgiout -.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-19
+
+
+
+          SPOT Image                                                    --S
+
+
+                           SPOT Image GIS data files are high-resolution
+                           satellite images produced by SPOT Image
+                           Corporation.
+
+          Syntax           --S
+
+          Extensions       .hdr (For image header information)
+                           .bil (For pixel data)
+                           .clr (For palette data [optional])
+
+          Creator          SPOT Image Corp.
+
+          Used by          SPOT Image Corp.
+
+          Variations       8 bits per pixel
+
+          Limitations      Only 1 band, GIS images are supported; if you
+                           have any other type of SPOT GIS images we would
+                           be interested in supporting them, please contact
+                           us.
+
+          Comments         SPOT Image images are actually three files.  You
+                           specify the name of the .hdr file and Alchemy
+                           automatically generates the name of the .bil and
+                           .clr files.
+
+                           If no palette file (.clr file) exists Alchemy
+                           will assume the image is grayscale.
+
+                           There may also be a statistics file with a .stx
+                           extension, but Alchemy ignores this file.
+
+                           When writing a SPOT file Alchemy will overwrite,
+                           without warning, existing .bil and .clr files.
+
+          Examples         Convert the Erdas file, phoenix.lan, to a SPOT
+                           Image file:
+
+                                alchemy --S phoenix.lan
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-20
+
+
+
+          Sun Raster                                                     -s
+
+
+                           Sun Raster files are used by Sun Microsystems
+                           workstations.
+
+          Syntax           -s compressionType
+
+          Parameter        compressionType:
+                                0:None
+                                1:Run length compression
+                           The default is None.
+
+          Extensions       .rast
+                           .ras
+                           .im
+                           .im1
+                           .im8
+                           .im24
+                           .im32
+
+          Creator          Sun Microsystems, Inc.
+
+          Used by          Sun workstations
+
+          Variations       Reads 1, 8, 24, and 32 bit Standard, BGR, RGB,
+                           and Byte Encoded (RLE) files.
+
+                           Writes 1, 8, 24, and 32 bit Standard files, and
+                           1 and 8 bit Byte Encoded (RLE) files.
+
+          Limitations      For a short time a version of the PBM toolkit
+                           wrote Sun Raster files which had the wrong RGB
+                           order.  Unfortunately there seem to be many
+                           images which were generated with this incorrect
+                           RGB order.  Please be aware that Alchemy's Sun
+                           Raster reading and writing capability has been
+                           extensively tested and compared to various other
+                           tools; the RGB order we use is correct.
+
+          Comments         Sun Raster files are normally not compressed and
+                           so take up lots of disk space.
+
+                           There is no standard extension for Sun Raster
+                           files; the extensions that Alchemy uses seem to
+                           be the most common.
+
+          Example          Convert the SGI file sgiout to a sun raster file
+                           called sun.im8:
+
+                                alchemy -s sgiout sun.im8
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-21
+
+
+
+          Windows Bitmap (BMP)                                           -w
+
+
+                           Windows BMP files are used by Microsoft Windows.
+
+          Syntax           -w compressionType
+
+          Parameter        compressionType:
+                                0:None
+                                1:RLE
+                                10:Write an ICOn file
+                           The default is none.
+
+          Extension        .bmp
+
+          Creator          Microsoft Corp.
+
+          Used by          Microsoft Windows
+
+          Variations       Reads 1, 4, 8, and 24 bit RGB (raw), RLE4, and
+                           RLE8 files.
+
+                           Writes 1, 4, 8, and 24 bit RGB (raw), RLE4, and
+                           RLE8 files.
+
+          Limitations      Several of the programs which claim to read and
+                           write RLE files do not do so correctly; we do
+                           not recommend writing RLE files unless you have
+                           verified that they work with your intended
+                           application.
+
+          Comments         Microsoft supplied Windows utilities cannot read
+                           nor write RLE4 or RLE8 files.
+
+                           If you are converting an image to use as
+                           wallpaper on a 16 colour display you will want
+                           to match the palette of the output image to one
+                           of the existing 16 colour BMP images supplied
+                           with Windows (chess.bmp, for example).  If you
+                           do not do this the wallpaper will not be loaded
+                           correctly.  See the example section below.
+
+                           If you are converting an image to use as
+                           wallpaper on a 256 colour Windows 3.1 display
+                           you will want to reserve the first 8 colours.
+                           Use the -c 256 8 option to do this (see below
+                           for an example).  This will force the first 8
+                           colours of the palette to be the standard
+                           Windows colours.
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-22
+
+
+
+                           If you are writing a Windows icon (.ico) file
+                           you must scale the image to a width and a height
+                           of 16, 32, or 64 pixels (32 being the best
+                           choice, since Windows displays all icons as
+                           32x32).  Also, Windows seems to remap all icons
+                           to the standard 16 colours, so the best results
+                           can be obtained if you match the palette of your
+                           icons to an existing icon (see the -f option).
+                           If you don't have any other icons you can also
+                           match to one of the 16 colour wallpaper files
+                           supplied with Windows.
+
+                           Alchemy can write an image with a palette
+                           identity file as specified in the Microsoft
+                           Multimedia Development Kit.  These images
+                           provide for quicker bitmap loading when used
+                           with the Multimedia Extensions.  A palette
+                           identity file has the first and last 10 palette
+                           entries reserved for 20 system defined colours.
+                           Alchemy will write such an image if you specify
+                           -c 246 10 as part of the command line.  Note
+                           that ordinarily this would produce a file which
+                           has 246 palette entries, but in this special
+                           case the file will have 256 palette entries (20
+                           fixed by the Windows specifications and 236
+                           chosen by Alchemy).  Note that you can also
+                           specify a number smaller than 246, but the
+                           palette will always have 256 colours (since the
+                           last 10 have to occupy positions 246 through
+                           255)
+
+          Related options  -c   Specify number of colours
+                           -f   Match to existing palette
+
+          Examples         Convert the image test.gif to a Windows BMP
+                           file:
+
+                                alchemy test.gif -w
+
+                           Convert the image test.gif to a 16 colour
+                           Windows BMP file to be used as wallpaper (the
+                           file chess.bmp is supplied with Windows 3.0
+                           (substitute leaves.bmp when using Windows 3.1);
+                           this example assumes that it is in the current
+                           directory):
+
+                                alchemy test.gif -f chess.bmp -w
+
+                           Convert the image test.gif to a 256 colour
+                           Windows BMP file to be used as wallpaper with
+                           Windows 3.1:
+
+                                alchemy test.gif -c256 8 -w
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-23
+
+
+
+                           Convert the image test.gif to an icon file for
+                           use with Windows 3.1:
+
+                                alchemy test.gif -Xb32 -Yb32 -w 10 -f
+                                leaves.bmp
+
+                           Convert the image test.gif to an identity
+                           palette BMP file:
+
+                                alchemy test.gif -w -c 246 10
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-24
+
+
+
+          XPM                                                           --x
+
+
+                           XPM files are used by the X Windowing System.
+                           XPM files are C source code files which can be
+                           read and written by various X utilities and are
+                           designed to be included in C source code for use
+                           as icons and other bit-mapped graphic images.
+
+          Syntax           --x
+
+          Extensions       .xpm
+                           .pm
+
+          Creator          MIT
+
+          Used by          The X Windowing system
+
+          Variations       8 bits per pixel
+
+          Limitations      Because .xpm files are actually C source code
+                           files there can be many variations of .xpm
+                           files.  Since adding a C preprocessor to Alchemy
+                           to handle all the theoretically allowable .xpm
+                           files is impractical we have instead designed
+                           Alchemy to interchange .xpm files with the PBM
+                           utilities and the X supplied utilities, and to
+                           read the sample .xpm files from IBM.  If you run
+                           across any .xpm files which Alchemy can not read
+                           please contact us.
+
+                           Some XPM files contain colour names instead of
+                           colour values for some of the colours.  The
+                           conversion table of these names into values is
+                           in the file rgb.txt.  Alchemy will look for this
+                           table in the current directory and automatically
+                           use it to convert XPM files if it is needed.
+                           Therefore you may have to copy the rgb.txt file
+                           to the current directory (its location is system
+                           dependent; ask you system administrator if you
+                           need help finding it).
+
+          Comments         When writing an XPM file with less than 27
+                           colours Alchemy writes 1 character XPM files,
+                           otherwise Alchemy writes 2 character XPM files.
+
+          Example          Convert the file picture.im32 to an XPM file
+                           using high quality scaling and preserving the
+                           aspect ratio:
+
+                                alchemy --x -Xb64 -+ picture.im32
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-25
+
+
+
+
+
+
+
+          Colour and Palette Options
+          -----------------------------------------------------------------
+
+
+          Introduction     Since version 1.5 we have added two options to
+                           the colour and palette section:
+
+                                Image Negation
+                                Gamma Correction
+
+
+
+                           Also the options for these options has been
+                           expanded:
+
+                                Dithering
+                                Spiffing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-26
+
+
+
+          Dither                                                         -d
+
+
+          Purpose          Specifies the type of dithering to apply to the
+                           image.
+
+          Syntax           -d[s] ditherType [perturbation]
+
+          Parameters       If the -d is immediately followed by an 's',
+                           then a serpentine raster is used.
+
+                           ditherType can be:
+                                0:None
+                                1:Floyd-Steinberg
+                                2:Stucki
+                                3:Jarvis, Judice, & Ninke
+                                4:Stevenson and Arce
+                                5:Sierra Lite
+                                20:Halftone (clustered dot)
+                                21:Bayer (dispersed dot)
+                           The default is Floyd-Steinberg.
+
+                           perturbation
+                                0 through 127
+                           The default is 0.
+
+          Comments         Dithering is used to reduce colour banding in an
+                           image caused by the palette not having a perfect
+                           match for every colour in the image.
+
+                           Types 1 through 5 are all error-diffusion
+                           dithers.  Types 1 and 5 are the fastest of the
+                           diffusion dithers, and they usually look the
+                           best on low resolution devices like CRTs.  Types
+                           2, 3, and 4 all tend to cause an image to appear
+                           more grainy on low resolution output devices
+                           (such as CRTs).  However, they produce better
+                           results than types 1 or 5 on high-resolution,
+                           low colour output devices such as laser
+                           printers.
+
+                           Type 20 is a digital halftone; this will produce
+                           the most accurate grays on a laser printer, but
+                           the image won't be as sharp as one produced by
+                           the error-diffusion dithers.  Type 21 is a
+                           dispersed dot ordered dither; it's only
+                           advantage over the error-diffusion algorithms is
+                           speed.
+
+                           The -d option only has an effect if the number
+                           of colours is being reduced or the image is
+                           being re-mapped to a new palette.
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-27
+
+
+
+                           Specifying a perturbation adds noise to the
+                           image, which can help break up visible patterns
+                           introduced by dithering.  The parameter
+                           specifies the magnitude of the noise.
+                           Perturbation has no effect on dither types 20
+                           and 21.
+
+                           Using a serpentine raster can also help to
+                           reduce visible patterns introduced by dithering.
+                           Using a serpentine raster has no effect on
+                           dither types 20 and 21.
+
+          Examples         Convert the 256 colour file image.gif to a 16
+                           colour PCX file using a uniform palette and no
+                           dithering:
+
+                                alchemy image.gif -p -c16 -d0 -u
+
+                           Convert the true colour image sample.jpg into a
+                           256 colour GIF file called sample.gif, using
+                           Stucki dithering:
+
+                                alchemy -g -d2 sample.jpg
+
+                           Convert the 256 colour image sample.gif into a
+                           one bit black and white PCL file called
+                           sample.pcl, using Jarvis, Judice, and Ninke
+                           dithering, a serpentine raster, and a little
+                           noise:
+
+                                alchemy -P -b -c2 -ds3 20 sample.gif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-28
+
+
+
+          Gamma correction                                               -G
+
+
+          Purpose          Specify the gamma of an input, output, or
+                           palette file and/or perform gamma correction.
+
+          Syntax           -G gammaType gammaValue
+
+          Parameters       gammaType:
+                                i:Specify input gamma
+                                o:Specify output gamma
+                                p:Specify gamma of palette
+
+                           gammaValue:
+                                0.0 to 4.0
+
+          Comments         To perform gamma correction, Alchemy needs to
+                           know both the input and output gamma.  For some
+                           file formats the gamma is known; if you're
+                           reading a file with known gamma, such as JPEG,
+                           PICT, PCPAINT, or a Targa file with the gamma
+                           field, you don't need to specify the input
+                           gamma.  Likewise, if you're writing a file which
+                           has a fixed gamma you don't need to specify an
+                           output gamma.  Even if reading or writing a file
+                           format which has a known gamma you may override
+                           it by using the -Gi or -Go option.
+
+                           However, even if both input and output gamma are
+                           known based on the input file and the output
+                           format, you must still enable gamma correction
+                           for any correction to take place; you can do
+                           this with just '-G' (if you had specified input,
+                           output, or palette gamma, this would be
+                           implied).  This is because there are quite a few
+                           images around that have specified or implied
+                           gammas that are wrong, which could cause Alchemy
+                           to make matters worse instead of better.
+
+                           Typical values for gamma are 1.0 for images from
+                           Macintoshes and 2.2 for images from PCs.
+
+          Examples         To convert the Mac PICT file test.pic, which has
+                           a gamma of 1.0, to a PCX file for use on a PC
+                           (which should have a gamma of 2.2), use:
+
+                                alchemy -p -Gi1.0 -Go2.2 test.pic
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-29
+
+
+
+                           The input gamma could have been omitted, as PICT
+                           files have an implied gamma of 1.0, but it's
+                           best to include it to reduce confusion.
+
+                           To convert the file image.tga, which has a gamma
+                           of 2.2, to a GIF file for use on a Mac, matching
+                           the palette test.pal which was created with a
+                           gamma of 1.5:
+
+                                alchemy image.tga -g -Gi2.2 -Go1.0 -Gp1.5 -
+                                ftest.pal
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-30
+
+
+
+          Negate                                                         -N
+
+
+          Purpose          Changes the image to a negative.
+
+          Syntax           -N
+
+          Comments         This is equivalent to a photographic negative.
+                           When used on black and white images black is
+                           changed to white and white is changed to black.
+                           On colour images each of the Red, Green, and
+                           Blue channels are inverted separately (so that
+                           bright blue will become bright yellow).
+
+          Examples         Negate the file sample.gif, generating a GIF
+                           file called negative.gif:
+
+                                alchemy sample.gif -N -g negative
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-31
+
+
+
+          Spiff                                                          -S
+
+
+          Purpose          Enhance the image contrast by stretching the
+                           pixel colour values to the full 0 to 255 range.
+
+          Syntax           -S spiffType
+
+          Parameter        spiffType:
+                                a:histogram stretching
+                                b:histogram linearization
+                           The default is histogram stretching.
+
+          Comments         This command can be used if the image you are
+                           converting is shifted in brightness or squished
+                           in contrast.  This can happen if you scan or
+                           digitize a very dark or very bright image.
+
+                           The default type, histogram stretching, simply
+                           insures that the image has pixels which are
+                           distributed over the entire output range (0 to
+                           255).
+
+                           Histogram linearization insures that the
+                           distribution of pixels over the output range is
+                           linear.
+
+                           Histogram linearization can produce
+                           significantly better results than histogram
+                           stretching for some images.  Generally you will
+                           want to try both types to see which gives better
+                           results.
+
+          Limitations      The -S option cannot be used at the same time as
+                           the -b option when converting from a true colour
+                           image.  A work around is to do the operation in
+                           two steps, converting it to black and white
+                           first and then spiffing the resulting image.
+
+                           Using the spiff option at the same time as the
+                           match palette, -f, or false colour, -F, options
+                           is not allowed.  This is because the spiff
+                           option would be performed before the palette is
+                           changed, which would nullify the effects.  A
+                           work around is to do the matching or false
+                           colouring first, and then spiff the resultant
+                           image.
+
+          Related options  -b   Black and White
+                           -f   Match palette
+                           -F   False colour image
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-32
+
+
+
+          Example          Convert the file gloomy.pcx into a PCX file
+                           called better.pcx:
+
+                                alchemy gloomy.pcx -S -p better.pcx
+
+                           Do the same thing using histogram linearization
+                           instead of histogram stretching:
+
+                                alchemy gloomy.pcx -Sb -p better.pcx
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-33
+
+
+
+
+
+
+
+
+
+
+          Viewing Options (MS-DOS Only)
+          -----------------------------------------------------------------
+
+
+          Display hardware Image Alchemy v1.6 supports VESA compatible and
+                           S3 equipped SVGA boards for 15 bit viewing.  In
+                           addition, a scaled 15 bit viewing option has
+                           been added.
+
+                           There are also two new environment variable
+                           options which affect viewing.  One allows the
+                           disabling of checking for the 8514/A board
+                           (which causes problems with some network adapter
+                           boards) and the other allows you to specify the
+                           maximum resolution that your monitor is capable
+                           of when viewing with a VESA compatible VGA
+                           board; see the section on installing Image
+                           Alchemy earlier in this addendum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-34
+
+
+
+          View Image in 15 Bit Mode                                     --v
+
+
+          Purpose          View file using 15 bits/pixel mode.  This allows
+                           true colour images to be viewed without
+                           dithering to a uniform palette.
+
+          Syntax           --v horizontalResolution
+
+          Parameter        horizontalResolution
+                                640:Use 640x480 mode
+                                800:Use 800x600 mode
+                                1024:Use 1024x768 mode
+                                1280:Use 1280x1024 mode
+
+          Comments         Requires either a Tseng 4000 equipped SVGA, an
+                           S3 equipped SVGA board, or a VESA compatible
+                           SVGA board with a Sierra DAC and 1 Megabyte of
+                           memory on the SVGA board.
+
+                           24 bit images will be dithered to 15 bit when
+                           using this option.  You can turn off dithering
+                           (speeding up the display and slightly reducing
+                           the image quality) by using the -d option.
+
+          Related options  --V  View scaled image in 15 bit mode
+                           -d   Specify dither type
+
+          Example          View madonna.tga:
+
+                                alchemy madonna.tga --v
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-35
+
+
+
+          View Scaled Image in 15 Bit Mode                              --V
+
+
+          Purpose          View image in 15 bit mode while scaling image to
+                           fit on monitor and correcting aspect ratio.
+
+          Syntax           --V horizontalResolution
+
+          Parameter        horizontalResolution
+                                640:Use 640x480 mode
+                                800:Use 800x600 mode
+                                1024:Use 1024x768 mode
+                                1280:Use 1280x1024 mode
+
+          Comments         Requires either a Tseng 4000 equipped SVGA, an
+                           S3 equipped SVGA board, or a VESA compatible
+                           SVGA board with a Sierra DAC and 1 Megabyte of
+                           memory on the SVGA board.
+
+                           This command will scale the image and correct
+                           the aspect ratio of the image by removing rows
+                           and/or columns from the image.
+
+                           Note that this option can also be useful for
+                           displaying images which are not larger than the
+                           screen but which have an aspect ratio different
+                           than the display.
+
+          Limitations      The same limitations as for scaled 8 bit viewing
+                           apply (see page 7-7 in the User's Manual).
+
+          Related options  -D   Specify image resolution
+                           --v  View image in 15 bit mode
+
+          Example          View sample.jpg:
+
+                                alchemy sample.jpg --V
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-36
+
+
+
+
+
+
+
+          Answers to Frequently Asked Questions
+          -----------------------------------------------------------------
+
+
+
+                  Question How do I get a copy of the current draft JPEG
+                           standard?
+
+                    Answer The JPEG standard is a ISO/IEC standard
+                           currently in Committee Draft form.
+
+                           Contact your local ISO/IEC office to get a copy.
+                           The reference numbers are ISO/IEC JTC 1 and /SC
+                           2 N2215; the document number is ISO/IEC CD
+                           10918-1.
+
+                           In the United States you can contact ANSI at:
+                              ANSI
+                              11 West 42nd St.
+                              New York, NY  10036
+                              (212) 642-4900
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-37
+
+
+
+
+
+
+
+          Version History
+          -----------------------------------------------------------------
+
+
+          Version 1.6      Released for MS-DOS, 80386 Protected Mode, Sun
+               05/92       SPARC, Interactive UNIX, SCO UNIX, IBM RS/6000,
+                           HP 9000/7xx & 8xx, and Silicon Graphics IRIS.
+
+                   Format  Added AVHRR support.
+                           Added PDS support.
+                           Added RIX support.
+                           Added SPOT Image support.
+                           Added GOES support.
+                           Added CALS support.
+                           Added Alpha Microsystems BMP support.
+                           Added Dr. Halo CUT support.
+                           Added First Publisher ART support.
+                           Added PictureMaker support.
+                           Added XPM support.
+                           Added IBM Picture Maker support.
+
+                           Disabled LZW Compression in TIFF pending
+                           resolution of patent issues (and changed default
+                           TIFF compression to PackBits).
+                           Added support for reading tiled TIFF images.
+                           Added support for reading JTIFF images.
+                           Added support for several additional types of
+                           incorrect TIFF files.
+                           Added support for reading type 1, mapped PICT
+                           files.
+                           Added support for reading and writing multi-bit
+                           grayscale and colour GEM files.
+                           Added support for reading 4 bit XWD files.
+                           Added support for an additional type of
+                           incorrect Targa file.
+                           Made PCL reading more robust (including adding
+                           support for landscape files).
+                           Added support for reading old format BMP files.
+                           Added support for Gamma information in Utah RLE
+                           files.
+                           Added default palettes to WPG reading.
+                           Added support for reading 5-5-5 PICT files.
+                           Added compression option to Sun Raster and SGI
+                           files.
+                           Added compression to writing Utah RLE, GEM, and
+                           WPG files.
+                           Added support for writing BMP Icon files and BMP
+                           palette identity files.
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-38
+
+
+
+                  Display  Added support for 15 bit VESA compatible SVGA
+                 (MS-DOS)  boards.
+                           Added support for S3 equipped 15 bit SVGA
+                           boards.
+                           Added scaled 15 bit view option.
+                           Added environment variables to indicate monitor
+                           resolution.
+
+                     Misc  Decreased memory usage for MS-DOS version
+                           (allowing the conversion of larger images).
+                           Added 5 new dithering types.
+                           Added histogram equalization option to spiff.
+                           Added negative flag.
+                           Added gamma correction.
+
+               Bugs fixed  Writing to directories not on the current disk
+                           (MS-DOS).
+                           Reading certain 1 bit PCX files.
+                           Reading certain PICT files.
+                           Checking for Targa files.
+                           Viewing on certain VESA boards (MS-DOS).
+                           Reading certain 8 bit ILBM files.
+                           Scaled viewing of very skinny images (MS-DOS).
+                           Histogram equalization (non MS-DOS).
+                           Writing WPG files.
+                           Writing 1 bit PBM files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   Image Alchemy v1.6   Copyright (c) 1992 Handmade Software Inc.  Addendum-39
